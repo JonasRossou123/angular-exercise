@@ -1,22 +1,21 @@
-
 {{ friendModel | json }}
 
 <div class="content">
-  <form id="test" name="friendbook" #formName="ngForm">
+  <form id="test" name="friendbook" #formName="ngForm" formName.form.invalid (ngSubmit)="test()">
     <label for="firstname">First name:</label><br>
-    <input type="text" placeholder="first name" id= firstname name="firstname" required minlength="3"
+    <input type="text" placeholder="first name" id= firstname name="firstname" required minlength="3" pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
            #firstname=ngModel [class.error]="firstname.invalid && firstname.touched" [(ngModel)]="friendModel._firstname"/>
     <br>
     <label for="lastname">Last name:</label><br>
-    <input type="text" placeholder="last name" id= lastname name="lastname" required minlength="3"
+    <input type="text" placeholder="last name" id= lastname name="lastname" required minlength="3" pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
            #lastname=ngModel [class.error]="lastname.invalid && lastname.touched" [(ngModel)]="friendModel._lastname"/>
     <br>
     <label for="email">Email:</label><br>
-    <input type="text" placeholder="email" id=email name="email" required minlength="3"
+    <input type="text" placeholder="email" id=email name="email" required minlength="3" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
            #email=ngModel [class.error]="email.invalid && email.touched" [(ngModel)]="friendModel._email"/>
     <br>
     <label for="phone">Phone:</label><br>
-    <input type="text" placeholder="phone number" id="phone" name="phone" required minlength="3"
+    <input type="text" placeholder="phone number" id="phone" name="phone" required minlength="3" pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"
            #phone=ngModel [class.error]="phone.invalid && phone.touched" [(ngModel)]="friendModel._phone"/>
     <br>
     <label for="language">Select language:</label><br>
@@ -27,8 +26,16 @@
         </option>
     </select>
     <br>
-    <button type="submit" value="Submit">Submit</button>
+    <button class="btn btn-pill btn-primary" type="submit" value="Submit" [class.disable]="formName.invalid">Submit</button>
+    <div *ngFor="let friend of allFriends">
+      {{ friend._phone }}
+    </div>
+
   </form>
 
+
 </div>
+
+
+
 

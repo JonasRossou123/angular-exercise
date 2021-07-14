@@ -1,3 +1,8 @@
 .error{
   color:red;
 }
+
+.disable {
+  cursor: not-allowed;
+  pointer-events:none;
+}
